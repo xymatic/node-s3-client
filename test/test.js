@@ -26,20 +26,10 @@ var before = global.before;
 
 var s3Bucket = process.env.S3_BUCKET;
 
-if (!s3Bucket || !process.env.S3_KEY || !process.env.S3_SECRET) {
-  console.log("S3_BUCKET, S3_KEY, and S3_SECRET env vars needed to run tests");
-  process.exit(1);
-}
-
 function createClient() {
   return s3.createClient({
     multipartUploadThreshold: 15 * 1024 * 1024,
-    multipartUploadSize: 5 * 1024 * 1024,
-    s3Options: {
-      accessKeyId: process.env.S3_KEY,
-      secretAccessKey: process.env.S3_SECRET,
-      endpoint: process.env.S3_ENDPOINT,
-    },
+    multipartUploadSize: 5 * 1024 * 1024
   });
 }
 
